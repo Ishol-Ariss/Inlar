@@ -32,10 +32,16 @@ $ npm run test:cov
 ### Routes
 
 ---
-  'Post':
+/user:
 ```bash
-$ /user
----
+$ get
+  {
+    id_user: ""
+  }
+
+  ---
+
+$ post
   {
 	"name": "",
 	"address": "", 
@@ -44,7 +50,6 @@ $ /user
 	"cellPhone": "",
 	"cpf": ""
 }
----
 ```
 ---
 
