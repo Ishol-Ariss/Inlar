@@ -35,13 +35,21 @@ $ npm run test:cov
 /user:
 ```bash
 $ get
+
+  Request: 
   {
     id_user: ""
   }
 
+  Response: 
+  {
+
+  }
   ---
 
 $ post
+
+  Request:
   {
 	"name": "",
 	"address": "", 
@@ -49,7 +57,12 @@ $ post
 	"password": "",
 	"cellPhone": "",
 	"cpf": ""
-}
+  }
+
+  Response: 
+  {
+    
+  }
 ```
 ---
 
