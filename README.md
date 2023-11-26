@@ -29,14 +29,14 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-##Routes
+### Routes
 
-# Create User
-$ Post - "/user" ==> expected request : {
-	"name": "",
-	"address": "", 
-	"email": "", 
-	"password": "",
-	"cellPhone": "",
-	"cpf": ""
-}
+---
+title: 'How to specify the route(s) for your rendered markdown files using "slug" and "slugs" in your markdown YAML header'
+published: true
+slugs: 
+  - a-first-slug
+  - a-second-slug
+---
+
+
