@@ -9,7 +9,7 @@ export class PrismaUserRepository implements UserRepository {
   constructor(private prisma: PrismaService) {}
 
   async createUser(user: User) {
-    const data = user
+    const data = PrismaUserMapper.toPrisma(user)
 
     await this.prisma.user.create({
       data,
