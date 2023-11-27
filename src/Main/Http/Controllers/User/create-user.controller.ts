@@ -2,13 +2,12 @@ import {
     Body,
     Post,
     HttpCode,
-    Controller
+    Controller,
+    HttpException,
+    HttpStatus,
 } from "@nestjs/common"
 import { z } from "zod"
 import { CreateUserService } from "src/Inlar/Application/service/User/create-user.service"
-import { HttpStatus, HttpException } from "@nestjs/common"
-import { Res, Response } from "@nestjs/common/decorators/http"
-import { UserAlreadyExistsError } from "src/Inlar/Application/Errors/User/user-already-exists.error"
 
 const createUserBody = z.object({
     name: z.string(),
@@ -24,15 +23,15 @@ type CreateUserBody = z.infer<typeof createUserBody>
 @Controller("/user")
 export class CreateUserController{
     constructor(
-        private registerUserService: CreateUserService,
+        private createUserService: CreateUserService,
     ) {}
 
     @Post()
     @HttpCode(201)
-    async handle(@Body() body: CreateUserBody, @Response() response: Response){
+    async handle(@Body() body: CreateUserBody){
         const { name, address, email, password, cellPhone, cpf } = createUserBody.parse(body)
 
-        const result = await this.registerUserService.execute({userProps: {
+        const result = await this.createUserService.execute({userProps: {
             name,
             address,
             cpf,
@@ -41,8 +40,8 @@ export class CreateUserController{
             email
         }})
 
-        if(result.isLeft){
-            response.json()
+        if(result.isLeft()){
+            throw new HttpException(result.value, HttpStatus.BAD_REQUEST)
         }
     }
 }

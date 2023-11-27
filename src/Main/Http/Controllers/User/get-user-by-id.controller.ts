@@ -18,7 +18,7 @@ type CreateUserBody = z.infer<typeof user>
 @Controller("/user")
 export class GetUserByIdController{
     constructor(
-        private getUserById: GetUserByIdService,
+        private getUserByIdService: GetUserByIdService,
     ) {}
 
     @Get()
@@ -26,7 +26,7 @@ export class GetUserByIdController{
     async handle(@Body() body: CreateUserBody){
         const { id_user } = user.parse(body)
 
-        const result = await this.getUserById.execute({
+        const result = await this.getUserByIdService.execute({
             id_user
         })
 

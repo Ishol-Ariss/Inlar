@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { HttpModule } from './Http/http.module';
 
 @Module({
-  imports: [
-    HttpModule,
-  ],
+  imports: [HttpModule],
 })
 export class AppModule {}
