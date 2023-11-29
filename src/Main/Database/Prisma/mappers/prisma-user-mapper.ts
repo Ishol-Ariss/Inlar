@@ -1,5 +1,5 @@
 import { Prisma, User as PrismaUser } from '@prisma/client'
-import { User } from 'src/Inlar/Types/User'
+import { User } from 'src/Inlar/Entities/User'
 
 
 export class PrismaUserMapper {
@@ -8,7 +8,7 @@ export class PrismaUserMapper {
       {
         name: raw.name ?? '',
         email: raw.email ?? '',
-        password: raw.email ?? '',
+        password: raw.password ?? '',
         cellPhone: raw.cellPhone ?? '',
         address: raw.address ?? '',
         cpf: raw.cpf ?? "",

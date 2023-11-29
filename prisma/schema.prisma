@@ -20,4 +20,17 @@ model User {
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+
+  donation Donation[]
+}
+
+model Donation {
+  ID_DOA Int @id @default(autoincrement())
+  DESC String?
+  QUAN Int?
+  CRE_AT DateTime @default(now())
+  UPD_AT DateTime @default(now())
+  ID_USR Int
+
+  id_user User ? @relation(fields: [ID_USR], references: [id_user])
 }

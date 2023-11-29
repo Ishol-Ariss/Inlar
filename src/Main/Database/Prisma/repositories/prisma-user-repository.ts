@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { User } from "src/Inlar/Types/User";
+import { User } from "src/Inlar/Entities/User";
 import { UserRepository } from "src/Inlar/Application/Repositories/user-repository";
 import { PrismaService } from "../prisma.service";
 import { PrismaUserMapper } from "../mappers/prisma-user-mapper";
@@ -16,12 +16,12 @@ export class PrismaUserRepository implements UserRepository {
     })
   }
 
-  async getUserById(id: String): Promise<User | null> {
+  async getUserById(id: number): Promise<User | null> {
       const id_user = id
 
       const res = await this.prisma.user.findUnique({
         where: {
-            id_user: Number(id_user)
+            id_user
         }
       })
 
@@ -37,6 +37,22 @@ export class PrismaUserRepository implements UserRepository {
     const res = await this.prisma.user.findUnique({
       where: {
         email
+      }
+    })
+
+    if(!res) {
+      return null
+    }
+
+    return PrismaUserMapper.toDomain(res)
+  }
+
+  async loginUser(email: string, password: string): Promise<User> | null {
+    
+    const res = await this.prisma.user.findUnique({
+      where: {
+        email,
+        password
       }
     })
 

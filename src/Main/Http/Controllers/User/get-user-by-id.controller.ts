@@ -1,5 +1,6 @@
 import {
     Body,
+    Query,
     HttpCode,
     Controller,
     Get,
@@ -7,26 +8,26 @@ import {
     HttpStatus
 } from "@nestjs/common"
 import { z } from "zod"
-import { GetUserByIdService } from "src/Inlar/Application/service/User/get-user-by-id.service"
+import { GetUserByIdUseCase } from "src/Inlar/Application/UseCases/User/get-user-by-id.usecase"
 
 const user = z.object({
-    id_user: z.string()
+    id_user: z.number()
 })
 
-type CreateUserBody = z.infer<typeof user>
+type GetUserBody = z.infer<typeof user>
 
-@Controller("/user")
+@Controller("/user/id")
 export class GetUserByIdController{
     constructor(
-        private getUserByIdService: GetUserByIdService,
+        private getUserByIdUseCase: GetUserByIdUseCase,
     ) {}
 
     @Get()
     @HttpCode(201)
-    async handle(@Body() body: CreateUserBody){
+    async handle(@Body() body: GetUserBody){
         const { id_user } = user.parse(body)
 
-        const result = await this.getUserByIdService.execute({
+        const result = await this.getUserByIdUseCase.execute({
             id_user
         })
 

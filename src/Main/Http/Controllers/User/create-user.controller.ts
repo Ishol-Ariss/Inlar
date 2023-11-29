@@ -7,7 +7,7 @@ import {
     HttpStatus,
 } from "@nestjs/common"
 import { z } from "zod"
-import { CreateUserService } from "src/Inlar/Application/service/User/create-user.service"
+import { CreateUserUseCase } from "src/Inlar/Application/UseCases/User/create-user.usecase"
 
 const createUserBody = z.object({
     name: z.string(),
@@ -23,7 +23,7 @@ type CreateUserBody = z.infer<typeof createUserBody>
 @Controller("/user")
 export class CreateUserController{
     constructor(
-        private createUserService: CreateUserService,
+        private createUserUseCase: CreateUserUseCase,
     ) {}
 
     @Post()
@@ -31,13 +31,13 @@ export class CreateUserController{
     async handle(@Body() body: CreateUserBody){
         const { name, address, email, password, cellPhone, cpf } = createUserBody.parse(body)
 
-        const result = await this.createUserService.execute({userProps: {
+        const result = await this.createUserUseCase.execute({userProps: {
             name,
             address,
-            cpf,
+            email,
             password,
             cellPhone,
-            email
+            cpf,
         }})
 
         if(result.isLeft()){
