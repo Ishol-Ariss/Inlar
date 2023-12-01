@@ -4,6 +4,8 @@ import { UserRepository } from "src/Inlar/Application/Repositories/user-reposito
 import { PrismaUserRepository } from "./Prisma/repositories/prisma-user-repository";
 import { DonationRepository } from 'src/Inlar/Application/Repositories/donation-repository';
 import { PrismaDonationRepository } from './Prisma/repositories/prisma-donation-repository';
+import { DonatorRepository } from 'src/Inlar/Application/Repositories/donator-repository';
+import { PrismaDonatorRepository } from './Prisma/repositories/prisma-donator-repository';
 
 @Module({
     providers: [
@@ -15,12 +17,17 @@ import { PrismaDonationRepository } from './Prisma/repositories/prisma-donation-
         {
             provide: DonationRepository,
             useClass: PrismaDonationRepository
+        },
+        {
+            provide: DonatorRepository,
+            useClass: PrismaDonatorRepository
         }
     ],
     exports: [
         PrismaService,
         UserRepository,
-        DonationRepository
+        DonationRepository,
+        DonatorRepository
     ]
 })
 

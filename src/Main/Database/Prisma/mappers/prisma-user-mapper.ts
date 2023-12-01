@@ -1,4 +1,4 @@
-import { Prisma, User as PrismaUser } from '@prisma/client'
+import { Prisma, user as PrismaUser } from '@prisma/client'
 import { User } from 'src/Inlar/Entities/User'
 
 
@@ -16,7 +16,7 @@ export class PrismaUserMapper {
     )
   }
 
-  static toPrisma(user: User): Prisma.UserCreateInput {
+  static toPrisma(user: User): Prisma.userCreateInput {
     return {
         name: user.name ?? '',
         email: user.email ?? '',

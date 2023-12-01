@@ -16,22 +16,6 @@ export class PrismaDonationRepository implements DonationRepository {
      })
  }
 
- async getAllDonationsByUserId(id_user: number): Promise<Donation[] | undefined> {
-     const res = await this.prisma.donation.findMany({
-        where: {
-            ID_USR: id_user
-        }
-     })
-
-     const data: Donation[] = []
-
-     res?.map(d => {
-        data.push(PrismaDonationMapper.toDomain(d))
-     })
-
-     return data
- }
-
  async getDonationById(id: number): Promise<Donation | undefined> {
      const res = await this.prisma.donation.findUnique({
         where: {
@@ -44,14 +28,19 @@ export class PrismaDonationRepository implements DonationRepository {
      return data
  }
 
- async updateDonationById(id: number, donation: Donation): Promise<void> {
-     const data = PrismaDonationMapper.toPrisma(donation)
+    async updateDonationById(id: number, donation: Donation): Promise<void> {
+        const data = PrismaDonationMapper.toPrisma(donation)
 
-     await this.prisma.donation.update({
-        where: {
-            ID_DOA: id
-        },
-        data
-     })
- }
+        await this.prisma.donation.update({
+            where: {
+                ID_DOA: id
+            },
+            data
+        })
+    }
+    async getAllDonations(): Promise<Donation[]> {
+        const data = await this.prisma.donation.findMany()
+
+        return data.map(PrismaDonationMapper.toDomain)
+    }
 }

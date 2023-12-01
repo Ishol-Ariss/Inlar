@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,27 +7,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id_user        Int      @id @default(autoincrement())
+model donation {
+  CRE_AT     DateTime @default(now())
+  DESC       String?
+  ID_DOA     Int      @id @default(autoincrement())
+  QUAN       Int?
+  UPD_AT     DateTime @default(now())
+  ID_DONATOR Int
+  donator    Donator  @relation(fields: [ID_DONATOR], references: [ID_DONATOR], map: "Donation_ID_DONATOR_fkey")
+
+  @@index([ID_DONATOR], map: "Donation_ID_DONATOR_fkey")
+}
+
+model Donator {
+  ID_DONATOR Int        @id @default(autoincrement())
+  NAME       String?
+  EMAIL      String?
+  CPF        String?
+  CELLPHONE  String?
+  ADDRESS   String?
+  CRE_AT     DateTime @default(now())
+  UPD_AT     DateTime? @default(now())
+  ID_DOA     Int?
+  donation   donation[]
+}
+
+model user {
+  id_user   Int      @id @default(autoincrement())
   name      String?
   address   String?
   password  String?
   cellPhone String?
   cpf       String?
-  email     String   @unique
+  email     String?   @unique(map: "User_email_key")
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-
-  donation Donation[]
-}
-
-model Donation {
-  ID_DOA Int @id @default(autoincrement())
-  DESC String?
-  QUAN Int?
-  CRE_AT DateTime @default(now())
-  UPD_AT DateTime @default(now())
-  ID_USR Int
-
-  id_user User ? @relation(fields: [ID_USR], references: [id_user])
+  updatedAt DateTime? @default(now())
 }

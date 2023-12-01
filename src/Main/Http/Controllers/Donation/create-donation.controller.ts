@@ -12,7 +12,7 @@ import { CreateDonationUseCase } from "src/Inlar/Application/UseCases/Donation/c
 const createDonationBody = z.object({
     description: z.string(),
     quantity: z.number(),
-    id_user: z.number()
+    id_donator: z.number()
 })
 
 type CreateDonationBody = z.infer<typeof createDonationBody>
@@ -26,12 +26,12 @@ export class CreateDonationController{
     @Post()
     @HttpCode(201)
     async handle(@Body() body: CreateDonationBody){
-        const { description, quantity, id_user } = createDonationBody.parse(body)
+        const { description, quantity, id_donator } = createDonationBody.parse(body)
 
         const result = await this.createDonationUseCase.execute({donationProps: {
             description,
             quantity,
-            id_user
+            id_donator
         }})
 
         if(result.isLeft()){

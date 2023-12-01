@@ -8,8 +8,12 @@ import { LoginUserController } from './Controllers/User/login-user.controller'
 import { LoginUserUseCase } from 'src/Inlar/Application/UseCases/User/login-user.usecase'
 import { CreateDonationController } from './Controllers/Donation/create-donation.controller'
 import { CreateDonationUseCase } from 'src/Inlar/Application/UseCases/Donation/create-donation.usecase'
-import { GetAllDonationsByUserIdController } from './Controllers/Donation/get-all-donation-by-user-id.controller'
-import { GetAllDonationsByUserIdUseCase } from 'src/Inlar/Application/UseCases/Donation/get-all-donations-by-user-id.usecase'
+import { CreateDonatorController } from './Controllers/Donator/create-donator.controller'
+import { CreateDonatorUseCase } from 'src/Inlar/Application/UseCases/Donator/create-donator.usecase'
+import { UpdateDonatorController } from './Controllers/Donator/update-donator.controller'
+import { UpdateDonatorUseCase } from 'src/Inlar/Application/UseCases/Donator/update-donator.usecase'
+import { GetAllDonatorAndDonationsController } from './Controllers/Donator/get-all-donators-and-donations.controller'
+import { GetAllDonatorAndDonationsUseCase } from 'src/Inlar/Application/UseCases/Donator/get-all-donators-and-donations.usecase'
 
 @Module({
     imports:[
@@ -20,14 +24,18 @@ import { GetAllDonationsByUserIdUseCase } from 'src/Inlar/Application/UseCases/D
         GetUserByIdController,
         LoginUserController,
         CreateDonationController,
-        GetAllDonationsByUserIdController
+        CreateDonatorController,
+        UpdateDonatorController,
+        GetAllDonatorAndDonationsController
     ],
     providers: [
         CreateUserUseCase,
         GetUserByIdUseCase,
         LoginUserUseCase,
         CreateDonationUseCase,
-        GetAllDonationsByUserIdUseCase
+        CreateDonatorUseCase,
+        UpdateDonatorUseCase,
+        GetAllDonatorAndDonationsUseCase
     ]
 })
 

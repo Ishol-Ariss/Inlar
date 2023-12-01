@@ -5,7 +5,7 @@ export interface DonationProps {
     quantity?: number
     createdAt?: Date
     updatedAt?: Date
-    id_user?: number
+    id_donator?: number
 }
 
 export class Donation extends Entity<DonationProps> {
@@ -21,8 +21,8 @@ export class Donation extends Entity<DonationProps> {
         this.props.updatedAt = date
     }
 
-    set id_user(id_user: number) {
-        this.props.id_user = id_user
+    set id_donator(id_donator: number) {
+        this.props.id_donator = id_donator
     }
 
     get description() {
@@ -33,8 +33,8 @@ export class Donation extends Entity<DonationProps> {
         return this.props.quantity
     }
 
-    get id_user() {
-        return this.props.id_user
+    get id_donator() {
+        return this.props.id_donator
     }
 
     get createdAt() {
